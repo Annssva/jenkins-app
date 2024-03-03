@@ -1,16 +1,16 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven'
-    }
+    // tools {
+    //     maven 'Maven'
+    // }
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    git branch: 'master', url: 'https://github.com/Annssva/jenkins-java-app.git'
-                }
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         script {
+        //             git branch: 'master', url: 'https://github.com/Annssva/jenkins-java-app.git'
+        //         }
+        //     }
+        // }
         stage('Build') {
             steps {
                 script {
@@ -21,7 +21,7 @@ pipeline {
     }
     post {
         success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            archiveArtifacts 'target/*.jar'
         }
     }
 }
