@@ -1,29 +1,29 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.3' 
-        }
+    agent any
+    environment {
+        DOCKER_IMAGE = 'maven:3.8.3'
     }
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: 'master', url: 'https://github.com/ваш-username/ваш-репозиторий.git'
+                    git branch: 'master', url: 'https://github.com/Annssva/jenkins-java-app.git'
                 }
             }
         }
         stage('Build') {
             steps {
                 script {
-                    sh 'mvn clean package' 
+                    docker.image(DOCKER_IMAGE).inside {
+                        sh 'mvn clean package'
+                    }
                 }
             }
         }
     }
     post {
         success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true 
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
-
