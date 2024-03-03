@@ -19,7 +19,7 @@ public class CountdownTimer {
     private static void countdownTimer(int seconds) {
         try {
             for (int i = seconds; i >= 0; i--) {
-                Thread.sleep(1000); // Приостанавливаем выполнение на 1 секунду
+                Thread.sleep(1000); 
                 System.out.print("\rОсталось времени: " + i + " сек");
             }
             System.out.println("\nВремя вышло!");
