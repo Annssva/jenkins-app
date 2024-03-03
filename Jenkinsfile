@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_IMAGE = 'maven:3.8.3'
+    tools {
+        maven 'maven-3.8.3'
     }
     stages {
         stage('Checkout') {
@@ -14,9 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'mvn clean package'
-                    }
+                    sh 'mvn clean package'
                 }
             }
         }
