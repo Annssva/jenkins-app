@@ -23,6 +23,7 @@ pipeline {
             steps {
                 script {
                     sh 'javac CountdownTimer.java'
+                    sh 'jar cfe CountdownTimer.jar CountdownTimer CountdownTimer.class'
                 }
             }
         }
@@ -30,9 +31,10 @@ pipeline {
         stage('Archive') {
             steps {
                 script {
-                    archiveArtifacts artifacts: 'CountdownTimer.class', fingerprint: true
+                    archiveArtifacts artifacts: 'CountdownTimer.jar', fingerprint: true
                 }
             }
         }
     }
 }
+
